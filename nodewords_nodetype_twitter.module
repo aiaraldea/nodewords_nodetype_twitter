@@ -85,7 +85,7 @@ function nodewords_nodetype_twitter_nodewords_tags_alter(&$output_tags, $tag_opt
       }
       // twitter image
       if ( ( $twitter_image = variable_get('nodewords_nodetype_twitter_image_'. $node->type, '') ) !== '' ) {
-        $output_tags['twitter:image'] = token_replace($twitter_description, 'node', $node);
+        $output_tags['twitter:image'] = token_replace($twitter_image, 'node', $node);
       }
      
     }
