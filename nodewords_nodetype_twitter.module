@@ -47,6 +47,14 @@ function nodewords_nodetype_twitter_form_alter(&$form, &$form_state, $form_id) {
       '#maxlength' => variable_get('nodewords_max_size', 255),
       '#description' => $description,
     );
+    $form['nodewords_nodetype']['nodewords_nodetype_twitter_image'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Default "twitter:image" meta tag for %type', array('%type' => $form['#node_type']->name)),
+      '#default_value' => variable_get('nodewords_nodetype_twitter_image_'. $form['#node_type']->type, ''),
+      '#size' => 60,
+      '#maxlength' => variable_get('nodewords_max_size', 255),
+      '#description' => $description,
+    );
   }
 }
 
@@ -74,6 +82,10 @@ function nodewords_nodetype_twitter_nodewords_tags_alter(&$output_tags, $tag_opt
       // twitter description
       if ( ( $twitter_description = variable_get('nodewords_nodetype_twitter_description_'. $node->type, '') ) !== '' ) {
         $output_tags['twitter:description'] = token_replace($twitter_description, 'node', $node);
+      }
+      // twitter image
+      if ( ( $twitter_image = variable_get('nodewords_nodetype_twitter_image_'. $node->type, '') ) !== '' ) {
+        $output_tags['twitter:image'] = token_replace($twitter_description, 'node', $node);
       }
      
     }
